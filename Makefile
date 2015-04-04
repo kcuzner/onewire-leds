@@ -18,10 +18,12 @@ F_CPU=9600000
 
 # Programmer parameters
 PMCU=t13
+PROGRAMMER=usbasp
 
 # Programs
 CC=avr-gcc
 OBJCOPY=avr-objcopy
+AVRDUDE=avrdude
 MKDIR=mkdir
 RM=rm
 
@@ -38,6 +40,9 @@ ASFLAGS=$(INCLUDES) -DF_CPU=$(F_CPU) -mmcu=$(MCU) -x assembler-with-cpp \
 LDFLAGS=-mmcu=$(MCU) -lm $(LIBS)
 
 all: $(BINDIR)/$(PROJECT).hex
+
+install: $(BINDIR)/$(PROJECT).hex
+	$(AVRDUDE) -c $(PROGRAMMER) -p $(PMCU) -e -U flash:w:$(BINDIR)/$(PROJECT).hex
 
 clean:
 	$(RM) -rf $(BINDIR)
