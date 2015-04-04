@@ -1,9 +1,16 @@
 /**
  * 1-Wire LED
  */
+#include "leds.h"
 
 int main(void)
 {
-    while(1) { }
+    leds_init();
+
+    while(1)
+    {
+        leds_tick();
+    }
+    
     return 0;
 }

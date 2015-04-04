@@ -23,6 +23,7 @@ PROGRAMMER=usbasp
 # Programs
 CC=avr-gcc
 OBJCOPY=avr-objcopy
+SIZE=avr-size
 AVRDUDE=avrdude
 MKDIR=mkdir
 RM=rm
@@ -54,6 +55,7 @@ $(BINDIR)/$(PROJECT).hex: $(BINDIR)/$(PROJECT).elf
 $(BINDIR)/$(PROJECT).elf: $(OBJ)
 	@$(MKDIR) -p $(dir $@)
 	$(CC) $(OBJ) $(LDFLAGS) -o $@
+	$(SIZE) -C --mcu=$(MCU) $(BINDIR)/$(PROJECT).elf
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@$(MKDIR) -p $(dir $@)
