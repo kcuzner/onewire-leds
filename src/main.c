@@ -5,6 +5,7 @@
 #include "onewire.h"
 
 #include <avr/pgmspace.h>
+#include <avr/io.h>
 
 #define N_CHANNELS 16
 
@@ -16,10 +17,21 @@
 #define GET_BLUE(V)  (V & 0x0000FF)
 
 /**
+ * Fuse data for this program to work properly on the ATTiny13A
+ */
+#ifdef __AVR_ATtiny13A__
+FUSES = {
+    .low = (FUSE_SPIEN & FUSE_CKDIV8 & FUSE_SUT0 & FUSE_CKSEL0),
+    .high = HFUSE_DEFAULT
+};
+#else
+#error "No fuses defined for selected processor"
+#endif
+
+/**
  * Channel color values in 24-bit format
  */
-static const uint32_t PROGMEM channel_colors[N_CHANNELS] =
-{
+static const uint32_t PROGMEM channel_colors[N_CHANNELS] = {
     0xff0000, //channel 1
     0xff9900,
     0xccff00,

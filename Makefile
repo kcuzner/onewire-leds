@@ -52,6 +52,13 @@ clean:
 $(BINDIR)/$(PROJECT).hex: $(BINDIR)/$(PROJECT).elf
 	$(OBJCOPY) -j .text -j .data -O $(HEXFORMAT) $< $@
 
+fuse: $(BINDIR)/fuses.bin
+	$(AVRDUDE) -c $(PROGRAMMER) -p $(PMCU) -U lfuse:w:0x$(shell dd if=bin/fuses.bin bs=1 count=1 | od -An -t x1 | tr -d ' '):m
+	$(AVRDUDE) -c $(PROGRAMMER) -p $(PMCU) -U hfuse:w:0x$(shell dd if=bin/fuses.bin bs=1 skip=1 count=1 | od -An -t x1 | tr -d ' '):m
+
+$(BINDIR)/fuses.bin: $(BINDIR)/$(PROJECT).elf
+	$(OBJCOPY) -j .fuse -O binary $< $(BINDIR)/fuses.bin
+
 $(BINDIR)/$(PROJECT).elf: $(OBJ)
 	@$(MKDIR) -p $(dir $@)
 	$(CC) $(OBJ) $(LDFLAGS) -o $@
