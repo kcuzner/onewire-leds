@@ -19,6 +19,7 @@
 #define ONEWIRE_READ_TICKS  4
 
 // state machine states
+// TODO: Make sure that a reset during a read or immediately following another reset is registered as a reset
 typedef enum { ST_IDLE, ST_RESET, ST_READ, ST_DONE } state_t;
 
 static volatile uint8_t byte_flag = 0;
@@ -124,6 +125,7 @@ ISR(TIM0_COMPB_vect)
             current_byte = 0;
             next_bit = 0;
         }
+        break;
     default:
         //it's been too long since the last falling edge
         state = ST_IDLE;
