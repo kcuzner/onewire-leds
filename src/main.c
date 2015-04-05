@@ -8,6 +8,7 @@
 #include <avr/io.h>
 
 #define N_CHANNELS 16
+#define OFF_TIME   8192
 
 #define GET_CHAN(V)  (V & 0x0F)
 #define GET_BLINK(V) (V & 0x10)
@@ -68,6 +69,10 @@ int main(void)
             chan = GET_CHAN(val);
             color = pgm_read_dword(&channel_colors[chan]);
             leds_set_color(GET_RED(color), GET_GREEN(color), GET_BLUE(color));
+            if (GET_BLINK(val))
+            {
+                leds_begin_off(OFF_TIME);
+            }
         }
     }
 

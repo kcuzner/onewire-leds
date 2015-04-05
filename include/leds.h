@@ -24,6 +24,11 @@ void leds_init(void);
 void leds_set_color(uint8_t red, uint8_t green, uint8_t blue);
 
 /**
+ * Turns the LEDs off for a set number of ticks
+ */
+void leds_begin_off(uint16_t period);
+
+/**
  * Tick function for the LEDs
  */
 void leds_tick(void);

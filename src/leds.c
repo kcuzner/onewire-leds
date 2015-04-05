@@ -10,6 +10,7 @@
 static uint8_t red_value = 0;
 static uint8_t green_value = 0;
 static uint8_t blue_value = 0;
+static uint16_t off_timer = 0;
 
 void leds_init(void)
 {
@@ -23,18 +24,23 @@ void leds_set_color(uint8_t red, uint8_t green, uint8_t blue)
     blue_value = blue;
 }
 
+void leds_begin_off(uint16_t period)
+{
+    off_timer = period;
+}
+
 void leds_tick(void)
 {
     static uint8_t count = 0;
 
     uint8_t mask = 0;
 
-    if (count == 0)
+    if (count == 0 && off_timer > 0)
     {
         //turn on all LEDs
         LEDS_PORT |= LEDS_MASK_RED | LEDS_MASK_GREEN | LEDS_MASK_BLUE;
     }
-    else
+    else if (count > 0)
     {
         //decide which leds get turned off this cycle
         if (count == red_value)
@@ -50,4 +56,5 @@ void leds_tick(void)
     }
 
     count++;
+    off_timer--;
 }
