@@ -21,7 +21,7 @@
  */
 #ifdef __AVR_ATtiny13A__
 FUSES = {
-    .low = (FUSE_SPIEN & FUSE_CKDIV8 & FUSE_SUT0 & FUSE_CKSEL0),
+    .low = (FUSE_SPIEN & FUSE_SUT0 & FUSE_CKSEL0), //9.6MHz, no ckdiv8
     .high = HFUSE_DEFAULT
 };
 #else
