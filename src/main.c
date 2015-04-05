@@ -6,6 +6,7 @@
 
 #include <avr/pgmspace.h>
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 #define N_CHANNELS 16
 #define OFF_TIME   8192
@@ -58,6 +59,8 @@ int main(void)
 
     leds_init();
     onewire_init();
+
+    sei();
 
     while(1)
     {
