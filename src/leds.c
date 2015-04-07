@@ -15,6 +15,7 @@ static uint16_t off_timer = 0;
 void leds_init(void)
 {
     LEDS_DDR |= LEDS_MASK_RED | LEDS_MASK_GREEN | LEDS_MASK_BLUE;
+    LEDS_PORT |= LEDS_MASK_RED | LEDS_MASK_GREEN | LEDS_MASK_BLUE;
 }
 
 void leds_set_color(uint8_t red, uint8_t green, uint8_t blue)
@@ -33,38 +34,26 @@ void leds_tick(void)
 {
     static uint8_t count = 0;
 
-    uint8_t mask = 0;
-
-    if (count == 0 && off_timer == 0)
+    if (off_timer > 0)
     {
-        //turn on all LEDs
-        if (red_value > 0)
-        {
-            LEDS_PORT |= LEDS_MASK_RED;
-        }
-        if (green_value > 0)
-        {
-            LEDS_PORT |= LEDS_MASK_GREEN;
-        }
-        if (blue_value > 0)
-        {
-            LEDS_PORT |= LEDS_MASK_BLUE;
-        }
+        LEDS_PORT |= LEDS_MASK_RED | LEDS_MASK_GREEN | LEDS_MASK_BLUE;
     }
-    else if (count > 0)
+    else
     {
-        mask = 0;
-        //decide which leds get turned off this cycle
-        if (count > red_value)
-            mask |= LEDS_MASK_RED;
-        if (count > green_value)
-            mask |= LEDS_MASK_GREEN;
-        if (count > blue_value)
-            mask |= LEDS_MASK_BLUE;
+        if (count < red_value)
+            LEDS_PORT &= ~LEDS_MASK_RED;
+        else
+            LEDS_PORT |= LEDS_MASK_RED;
 
-        //turn off any leds in the mask
-        if (mask)
-            LEDS_PORT &= ~mask;
+        if (count < green_value)
+            LEDS_PORT &= ~LEDS_MASK_GREEN;
+        else
+            LEDS_PORT |= LEDS_MASK_GREEN;
+
+        if (count < blue_value)
+            LEDS_PORT &= ~LEDS_MASK_BLUE;
+        else
+            LEDS_PORT |= LEDS_MASK_BLUE;
     }
 
     count++;
