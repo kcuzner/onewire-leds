@@ -8,7 +8,7 @@
 
 #define ONEWIRE_DDR   DDRB
 #define ONEWIRE_INPUT PINB
-#define ONEWIRE_PIN   1
+#define ONEWIRE_PIN   4
 
 /**
  * Initializes the one-wire bus
