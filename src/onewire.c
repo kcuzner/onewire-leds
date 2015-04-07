@@ -15,7 +15,7 @@
 //4 ticks is our sample time after a falling edge, landing at about 26uS
 // - NOTE: This is equivalent to 256 clock cycles, giving us ample
 //   computation time
-#define ONEWIRE_RESET_TICKS 72
+#define ONEWIRE_RESET_TICKS 68
 #define ONEWIRE_READ_TICKS  4
 
 // state machine states
@@ -37,12 +37,12 @@ void onewire_init(void)
 
     //interrupt on falling edges of INT0
     MCUCR &= 0xFC; //clear bottom two bits
-    MCUCR |= ISC01; //ISC01 = 1, ISC00 = 1 => interrupt on falling edge
-    GIMSK |= INT0;
+    MCUCR |= (1<<ISC01); //ISC01 = 1, ISC00 = 1 => interrupt on falling edge
+    GIMSK |= (1<<INT0);
 
     TCCR0A = 0; //normal operation
-    TCCR0B = CS01 | CS02; //clock source is clk/64
-    TIMSK0 = OCIE0B | OCIE0A | TOIE0; //enable all interrupts for the timer
+    TCCR0B = (1<<CS01) | (1<<CS00); //clock source is clk/64
+    TIMSK0 = (1<<OCIE0B) | (1<<OCIE0A) | (1<<TOIE0); //enable all interrupts for the timer
 
     //since the timer is reset to 0 on a falling edge, we can use the following:
     //interrupt A: Time to sample!

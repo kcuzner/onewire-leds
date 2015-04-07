@@ -10,7 +10,7 @@
 #include <avr/wdt.h>
 
 #define N_CHANNELS 16
-#define OFF_TIME   8192
+#define OFF_TIME   0xFFFF
 
 #define GET_CHAN(V)  (V & 0x0F)
 #define GET_BLINK(V) (V & 0x10)

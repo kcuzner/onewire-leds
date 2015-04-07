@@ -9,9 +9,9 @@
 
 #define LEDS_PORT      PORTB
 #define LEDS_DDR       DDRB
-#define LEDS_PIN_RED   0
-#define LEDS_PIN_GREEN 1
-#define LEDS_PIN_BLUE  2
+#define LEDS_PIN_RED   2
+#define LEDS_PIN_GREEN 3
+#define LEDS_PIN_BLUE  4
 
 /**
  * Initializes the LED module
