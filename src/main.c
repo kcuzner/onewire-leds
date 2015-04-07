@@ -7,6 +7,7 @@
 #include <avr/pgmspace.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/wdt.h>
 
 #define N_CHANNELS 16
 #define OFF_TIME   8192
@@ -57,6 +58,8 @@ int main(void)
     uint8_t val, chan;
     uint32_t color;
 
+    wdt_enable(WDTO_15MS);
+
     leds_init();
     onewire_init();
 
@@ -64,6 +67,7 @@ int main(void)
 
     while(1)
     {
+        wdt_reset();
         leds_tick();
 
         if (onewire_has_new_byte())
