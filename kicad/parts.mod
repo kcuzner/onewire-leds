@@ -1,0 +1,74 @@
+PCBNEW-LibModule-V1  Fri 10 Apr 2015 01:15:34 PM MDT
+# encoding utf-8
+Units mm
+$INDEX
+4-PLCC
+CP3V
+$EndINDEX
+$MODULE 4-PLCC
+Po 0 0 0 15 55281F19 00000000 ~~
+Li 4-PLCC
+Sc 0
+AR 
+Op 0 0 0
+T0 0 -3.81 1 1 0 0.15 N V 21 N "4-PLCC"
+T1 0 5.08 1 1 0 0.15 N V 21 N "VAL**"
+DS -2.8 -1.1 -1.9 -2 0.15 21
+DS -2.8 -2 2.8 -2 0.15 21
+DS 2.8 -2 2.8 2 0.15 21
+DS 2.8 2 -2.8 2 0.15 21
+DS -2.8 2 -2.8 -2 0.15 21
+$PAD
+Sh "1" R 1.4 1.1 0 0 0
+Dr 0 0 0
+At SMD N 00888000
+Ne 0 ""
+Po -1.5 -0.8
+$EndPAD
+$PAD
+Sh "2" R 1.4 1.1 0 0 0
+Dr 0 0 0
+At SMD N 00888000
+Ne 0 ""
+Po 1.5 -0.8
+$EndPAD
+$PAD
+Sh "3" R 1.4 1.1 0 0 0
+Dr 0 0 0
+At SMD N 00888000
+Ne 0 ""
+Po -1.5 0.8
+$EndPAD
+$PAD
+Sh "4" R 1.4 1.1 0 0 0
+Dr 0 0 0
+At SMD N 00888000
+Ne 0 ""
+Po 1.5 0.8
+$EndPAD
+$EndMODULE 4-PLCC
+$MODULE CP3V
+Po 0 0 0 15 5528214F 00000000 ~~
+Li CP3V
+Sc 0
+AR 
+Op 0 0 0
+T0 0 -7.112 1 1 0 0.15 N V 21 N "CP3V"
+T1 0 7.366 1 1 0 0.15 N V 21 N "VAL**"
+DC 0 0 6.35 0.254 0.15 21
+$PAD
+Sh "1" R 1.8 1.8 0 0 0
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po -3.81 0
+$EndPAD
+$PAD
+Sh "2" C 1.8 1.8 0 0 0
+Dr 0.8 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 3.81 0
+$EndPAD
+$EndMODULE CP3V
+$EndLIBRARY

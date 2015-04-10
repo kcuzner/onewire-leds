@@ -1,2 +1,15 @@
+# build stuff
+
 bin
 obj
+
+# kicad stuff
+
+*.bak
+*.bck
+*.net
+*.kicad_pcb-bak
+kicad/$*
+kicad/gerber
+
+

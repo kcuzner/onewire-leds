@@ -1,0 +1,80 @@
+Cmp-Mod V01 Created by CvPcb (2013-may-18)-stable date = Fri 10 Apr 2015 01:16:46 PM MDT
+
+BeginCmp
+TimeStamp = /55281535;
+Reference = C1;
+ValeurCmp = 470u;
+IdModule  = CP3V;
+EndCmp
+
+BeginCmp
+TimeStamp = /55281544;
+Reference = D1;
+ValeurCmp = 1N4148;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /552814F1;
+Reference = IC1;
+ValeurCmp = ATTINY13A-P;
+IdModule  = DIP-8__300;
+EndCmp
+
+BeginCmp
+TimeStamp = /55281BE1;
+Reference = LED1;
+ValeurCmp = CLVBA-FKA;
+IdModule  = 4-PLCC;
+EndCmp
+
+BeginCmp
+TimeStamp = /552817F0;
+Reference = P1;
+ValeurCmp = CONN_2;
+IdModule  = SIL-2;
+EndCmp
+
+BeginCmp
+TimeStamp = /552819EC;
+Reference = R1;
+ValeurCmp = 10K;
+IdModule  = R5;
+EndCmp
+
+BeginCmp
+TimeStamp = /55281935;
+Reference = R2;
+ValeurCmp = R;
+IdModule  = R5;
+EndCmp
+
+BeginCmp
+TimeStamp = /55281944;
+Reference = R3;
+ValeurCmp = R;
+IdModule  = R5;
+EndCmp
+
+BeginCmp
+TimeStamp = /55281953;
+Reference = R4;
+ValeurCmp = R;
+IdModule  = R5;
+EndCmp
+
+BeginCmp
+TimeStamp = /55281849;
+Reference = R5;
+ValeurCmp = 8K2;
+IdModule  = R5;
+EndCmp
+
+BeginCmp
+TimeStamp = /5528183A;
+Reference = R6;
+ValeurCmp = 2K2;
+IdModule  = R5;
+EndCmp
+
+EndListe
