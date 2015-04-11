@@ -71,6 +71,8 @@ ISR(INT0_vect)
         //every falling edge resets the timer
         TCNT0 = 0;
 
+        PORTB |= (1<<0);
+
         switch(state)
         {
         case ST_IDLE:
@@ -123,6 +125,7 @@ ISR(TIM0_COMPB_vect)
     case ST_BEGIN_RESET:
         if (ONEWIRE_PIN_VALUE)
         {
+            PORTB &= ~(1<<0);
             //still high? we have a reset
             state = ST_RESET;
             current_byte = 0;

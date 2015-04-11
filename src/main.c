@@ -25,7 +25,7 @@
 #ifdef __AVR_ATtiny13A__
 FUSES = {
     .low = (FUSE_SPIEN & FUSE_SUT0 & FUSE_CKSEL0), //9.6MHz, no ckdiv8
-    .high = HFUSE_DEFAULT
+    .high = (FUSE_BODLEVEL1) //brown out at 2.7V
 };
 #else
 #error "No fuses defined for selected processor"
@@ -57,11 +57,20 @@ int main(void)
 {
     uint8_t val, chan;
     uint32_t color;
+    uint16_t i;
 
     wdt_enable(WDTO_15MS);
 
     leds_init();
     onewire_init();
+
+    //delay at the beginning to ensure we have a steady supply before turning on the LEDs
+    for (i = 0; i < OFF_TIME; i++)
+    {
+        wdt_reset();
+    }
+
+    DDRB |= (1<<0);
 
     sei();
 
