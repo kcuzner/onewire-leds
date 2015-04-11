@@ -10,6 +10,7 @@ obj
 *.net
 *.kicad_pcb-bak
 kicad/$*
+kicad/_*
 kicad/gerber
 
 

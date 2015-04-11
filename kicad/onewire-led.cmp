@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-may-18)-stable date = Fri 10 Apr 2015 01:16:46 PM MDT
+Cmp-Mod V01 Created by PcbNew date = Fri 10 Apr 2015 03:30:54 PM MDT
 
 BeginCmp
 TimeStamp = /55281535;
@@ -11,7 +11,7 @@ BeginCmp
 TimeStamp = /55281544;
 Reference = D1;
 ValeurCmp = 1N4148;
-IdModule  = D4;
+IdModule  = D3;
 EndCmp
 
 BeginCmp
@@ -32,49 +32,49 @@ BeginCmp
 TimeStamp = /552817F0;
 Reference = P1;
 ValeurCmp = CONN_2;
-IdModule  = SIL-2;
+IdModule  = SIL-2-WIDE;
 EndCmp
 
 BeginCmp
 TimeStamp = /552819EC;
 Reference = R1;
 ValeurCmp = 10K;
-IdModule  = R5;
+IdModule  = R4;
 EndCmp
 
 BeginCmp
 TimeStamp = /55281935;
 Reference = R2;
 ValeurCmp = R;
-IdModule  = R5;
+IdModule  = R4;
 EndCmp
 
 BeginCmp
 TimeStamp = /55281944;
 Reference = R3;
 ValeurCmp = R;
-IdModule  = R5;
+IdModule  = R4;
 EndCmp
 
 BeginCmp
 TimeStamp = /55281953;
 Reference = R4;
 ValeurCmp = R;
-IdModule  = R5;
+IdModule  = R4;
 EndCmp
 
 BeginCmp
 TimeStamp = /55281849;
 Reference = R5;
 ValeurCmp = 8K2;
-IdModule  = R5;
+IdModule  = R4;
 EndCmp
 
 BeginCmp
 TimeStamp = /5528183A;
 Reference = R6;
 ValeurCmp = 2K2;
-IdModule  = R5;
+IdModule  = R4;
 EndCmp
 
 EndListe
