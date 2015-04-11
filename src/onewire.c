@@ -20,7 +20,7 @@
 
 // state machine states
 // TODO: Make sure that a reset during a read or immediately following another reset is registered as a reset
-typedef enum { ST_IDLE, ST_RESET, ST_READ, ST_DONE } state_t;
+typedef enum { ST_IDLE, ST_BEGIN_RESET, ST_RESET, ST_READ, ST_DONE } state_t;
 
 static volatile uint8_t byte_flag = 0;
 static volatile uint8_t finished_byte = 0;
@@ -35,9 +35,9 @@ void onewire_init(void)
     //we want an input on our pin
     ONEWIRE_DDR &= ~ONEWIRE_PIN_MASK;
 
-    //interrupt on falling edges of INT0
+    //interrupt on rising edges of INT0
     MCUCR &= 0xFC; //clear bottom two bits
-    MCUCR |= (1<<ISC01); //ISC01 = 1, ISC00 = 1 => interrupt on falling edge
+    MCUCR |= (1<<ISC01) | (1<<ISC00); //ISC01 = 1, ISC00 = 1 => interrupt on rising edge
     GIMSK |= (1<<INT0);
 
     TCCR0A = 0; //normal operation
@@ -66,13 +66,16 @@ uint8_t onewire_read_byte(void)
 //falling edge
 ISR(INT0_vect)
 {
-    if (!ONEWIRE_PIN_VALUE)
+    if (ONEWIRE_PIN_VALUE)
     {
         //every falling edge resets the timer
         TCNT0 = 0;
 
         switch(state)
         {
+        case ST_IDLE:
+            state = ST_BEGIN_RESET;
+            break;
         case ST_RESET:
             //we are now reading a byte
             state = ST_READ;
@@ -95,7 +98,7 @@ ISR(TIM0_COMPA_vect)
     case ST_READ:
         //it is time to sample
         current_byte >>= 1;
-        if (ONEWIRE_PIN_VALUE)
+        if (!ONEWIRE_PIN_VALUE) //inverted values for our ground-based bus (0 = 1)
             current_byte |= 0x80; //LSB first
         next_bit++;
         if (next_bit > 7)
@@ -117,13 +120,17 @@ ISR(TIM0_COMPB_vect)
 {
     switch(state)
     {
-    case ST_IDLE:
-        if (!ONEWIRE_PIN_VALUE)
+    case ST_BEGIN_RESET:
+        if (ONEWIRE_PIN_VALUE)
         {
-            //still low? we have a reset
+            //still high? we have a reset
             state = ST_RESET;
             current_byte = 0;
             next_bit = 0;
+        }
+        else
+        {
+            state = ST_IDLE;
         }
         break;
     default:
